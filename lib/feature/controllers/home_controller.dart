@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 import 'package:testvid/generated/l10n.dart';
+import 'package:testvid/core/utils/snackbar_helper.dart';
 
 class VideoController extends GetxController {
   Rx<File?> videoFile = Rx<File?>(null);
@@ -134,13 +135,7 @@ class VideoController extends GetxController {
   }
 
   void runDeepfakeCheck() {
-    // Placeholder for API call to check deepfake
-    Get.snackbar(
-      'Processing',
-      'Deepfake check would run here with an API',
-      backgroundColor: Colors.blueGrey,
-      colorText: Colors.white,
-    );
+    SnackbarHelper.showInfo('Processing', 'Deepfake check would run here with an API');
   }
 
   void clearVideo() async {

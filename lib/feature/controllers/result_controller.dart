@@ -8,6 +8,7 @@ import 'package:video_player/video_player.dart';
 import '../domain/entities/deepfake_result_entity.dart';
 import '../domain/usecases/analyze_video_usecase.dart';
 import 'package:testvid/core/services/app_logger.dart';
+import 'package:testvid/core/utils/snackbar_helper.dart';
 
 class ResultController extends GetxController {
   final AnalyzeVideoUseCase analyzeVideoUseCase;
@@ -51,14 +52,7 @@ class ResultController extends GetxController {
 
       await _saveAnalysisToHistory();
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Failed to analyze video: ${e.toString()}',
-        snackPosition: SnackPosition.BOTTOM,
-        duration: const Duration(seconds: 5),
-        backgroundColor: Get.theme.colorScheme.error.withValues(alpha: 0.8),
-        colorText: Get.theme.colorScheme.onError,
-      );
+      SnackbarHelper.showError('Error', 'Failed to analyze video: ${e.toString()}');
     } finally {
       isAnalyzing.value = false;
     }

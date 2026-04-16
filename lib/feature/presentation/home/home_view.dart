@@ -13,6 +13,7 @@ import 'package:testvid/feature/bindings/result_binding.dart';
 import 'package:testvid/routes/app_pages.dart';
 import 'package:testvid/generated/l10n.dart';
 import 'package:testvid/core/services/app_logger.dart';
+import 'package:testvid/core/utils/snackbar_helper.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -311,17 +312,9 @@ class HomeView extends StatelessWidget {
 
                                 Get.toNamed("/result");
                               } else {
-                                Get.snackbar(
+                                SnackbarHelper.showError(
                                   S.of(context).uploadRequired,
                                   S.of(context).pleaseUploadFirst,
-                                  backgroundColor: isDark
-                                      ? Colors.white
-                                      : const Color(0xFF333333),
-                                  colorText:
-                                      isDark ? Colors.black : Colors.white,
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  margin: const EdgeInsets.all(20),
-                                  borderRadius: 10,
                                 );
                               }
                             },

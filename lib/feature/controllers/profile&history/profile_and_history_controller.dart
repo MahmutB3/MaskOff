@@ -5,12 +5,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:testvid/feature/data/models/user_model.dart';
 import 'package:testvid/feature/data/models/history_record_model.dart';
 import 'package:testvid/generated/l10n.dart';
-import 'package:testvid/feature/controllers/theme_controller.dart';
+import 'package:testvid/core/utils/snackbar_helper.dart';
 
 class ProfileController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final ThemeController _themeController = Get.find<ThemeController>();
 
   // Text controllers
   final firstNameController = TextEditingController();
@@ -229,37 +228,11 @@ class ProfileController extends GetxController {
 
   // Helper methods for showing snackbars
   void _showSuccessSnackbar(String title, String message) {
-    final isDark = _themeController.isDarkMode;
-    Get.snackbar(
-      title,
-      message,
-      backgroundColor: isDark
-          ? Colors.green.withValues(alpha: 0.4)
-          : Colors.green.withValues(alpha: 0.8),
-      colorText: Colors.white,
-      snackPosition: SnackPosition.BOTTOM,
-      duration: const Duration(seconds: 3),
-      margin: const EdgeInsets.all(10),
-      borderRadius: 8,
-      icon: const Icon(Icons.check_circle, color: Colors.white),
-    );
+    SnackbarHelper.showSuccess(title, message);
   }
 
   void _showErrorSnackbar(String title, String message) {
-    final isDark = _themeController.isDarkMode;
-    Get.snackbar(
-      title,
-      message,
-      backgroundColor: isDark
-          ? Colors.red.withValues(alpha: 0.4)
-          : Colors.red.withValues(alpha: 0.8),
-      colorText: Colors.white,
-      snackPosition: SnackPosition.BOTTOM,
-      duration: const Duration(seconds: 3),
-      margin: const EdgeInsets.all(10),
-      borderRadius: 8,
-      icon: const Icon(Icons.error_outline, color: Colors.white),
-    );
+    SnackbarHelper.showError(title, message);
   }
 
   // History Records Management Methods

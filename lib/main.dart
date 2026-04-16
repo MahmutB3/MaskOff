@@ -8,6 +8,7 @@ import 'package:testvid/generated/l10n.dart';
 import 'package:testvid/routes/app_pages.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:testvid/core/utils/snackbar_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +38,7 @@ class MyApp extends GetView<ThemeController> {
     final languageController = Get.find<LanguageController>();
 
     return Obx(() => GetMaterialApp(
+          scaffoldMessengerKey: scaffoldMessengerKey,
           localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,

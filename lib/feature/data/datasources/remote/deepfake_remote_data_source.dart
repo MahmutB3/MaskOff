@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:get/get.dart';
 import 'package:testvid/feature/data/models/deepfake_result_model.dart';
 import 'package:testvid/core/services/app_logger.dart';
+import 'package:testvid/core/utils/snackbar_helper.dart';
 
 abstract class DeepfakeRemoteDataSource {
   Future<DeepfakeResultModel> analyzeVideo(File videoFile);
@@ -57,15 +57,7 @@ class DeepfakeRemoteDataSourceImpl implements DeepfakeRemoteDataSource {
       }
     } catch (e) {
       AppLogger().error('Error during API call: $e');
-      // Show error message to user
-      Get.snackbar(
-        'Error',
-        'Failed to connect to server: $e',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Get.theme.colorScheme.error,
-        colorText: Get.theme.colorScheme.onError,
-        duration: const Duration(seconds: 5),
-      );
+      SnackbarHelper.showError('Error', 'Failed to connect to server: $e');
       rethrow;
     }
   }

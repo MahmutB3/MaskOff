@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:testvid/feature/controllers/theme_controller.dart';
 import 'package:testvid/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:testvid/generated/l10n.dart';
 import 'package:testvid/core/services/app_logger.dart';
+import 'package:testvid/core/utils/snackbar_helper.dart';
 
 class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final ThemeController _themeController = Get.find<ThemeController>();
 
   // Observable user state
   final Rx<User?> user = Rx<User?>(null);
@@ -594,37 +593,11 @@ class AuthController extends GetxController {
 
   // Güncellenmiş hata bildirimi için genel bir metot oluşturalım
   void _showSuccessSnackbar(String title, String message) {
-    final isDark = _themeController.isDarkMode;
-    Get.snackbar(
-      title,
-      message,
-      backgroundColor: isDark
-          ? Colors.green.withValues(alpha: 0.4)
-          : Colors.green.withValues(alpha: 0.8),
-      colorText: Colors.white,
-      snackPosition: SnackPosition.BOTTOM,
-      duration: const Duration(seconds: 3),
-      margin: const EdgeInsets.all(10),
-      borderRadius: 8,
-      icon: const Icon(Icons.check_circle, color: Colors.white),
-    );
+    SnackbarHelper.showSuccess(title, message);
   }
 
   void _showErrorSnackbar(String title, String message) {
-    final isDark = _themeController.isDarkMode;
-    Get.snackbar(
-      title,
-      message,
-      backgroundColor: isDark
-          ? Colors.red.withValues(alpha: 0.4)
-          : Colors.red.withValues(alpha: 0.8),
-      colorText: Colors.white,
-      snackPosition: SnackPosition.BOTTOM,
-      duration: const Duration(seconds: 3),
-      margin: const EdgeInsets.all(10),
-      borderRadius: 8,
-      icon: const Icon(Icons.error_outline, color: Colors.white),
-    );
+    SnackbarHelper.showError(title, message);
   }
 
   // Set current screen

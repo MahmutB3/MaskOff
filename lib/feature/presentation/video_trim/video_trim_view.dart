@@ -9,6 +9,7 @@ import 'package:testvid/feature/presentation/video_trim/widgets/video_trim_heade
 import 'package:testvid/feature/presentation/video_trim/widgets/video_preview_card.dart';
 import 'package:testvid/feature/presentation/video_trim/widgets/video_trim_controls.dart';
 import 'package:testvid/feature/presentation/video_trim/widgets/video_trim_progress.dart';
+import 'package:testvid/core/utils/snackbar_helper.dart';
 
 class VideoTrimView extends StatefulWidget {
   final File videoFile;
@@ -115,12 +116,9 @@ class VideoTrimViewState extends State<VideoTrimView> {
     } catch (e) {
       setState(() => _progressVisibility = false);
       AppLogger().error('Error saving video: $e');
-      Get.snackbar(
+      SnackbarHelper.showError(
         S.of(Get.context!).error,
         S.of(Get.context!).failedToSaveVideo,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
       );
     }
   }
