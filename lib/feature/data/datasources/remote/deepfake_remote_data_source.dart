@@ -11,7 +11,7 @@ abstract class DeepfakeRemoteDataSource {
 
 class DeepfakeRemoteDataSourceImpl implements DeepfakeRemoteDataSource {
   //final String baseUrl = 'http://10.0.2.2:5000';
-  final String baseUrl = 'https://89b1-85-105-61-128.ngrok-free.app';
+  final String baseUrl = 'https://f80f-213-153-145-22.ngrok-free.app';
 
   @override
   Future<DeepfakeResultModel> analyzeVideo(File videoFile) async {

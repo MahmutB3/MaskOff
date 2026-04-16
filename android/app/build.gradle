@@ -27,7 +27,7 @@ android {
         applicationId = "com.example.testvid"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = 23  // Firebase Auth için en az 23 gerekiyor
+        minSdkVersion = flutter.minSdkVersion  // Firebase Auth için en az 23 gerekiyor
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
