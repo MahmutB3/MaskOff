@@ -124,12 +124,24 @@ class VideoController extends GetxController {
 
   void showTrimmer() async {
     if (videoFile.value != null) {
+      // Pause and dispose current player to free up memory before opening trimmer
+      if (playerController.value != null) {
+        await playerController.value!.pause();
+        await playerController.value!.dispose();
+        playerController.value = null;
+        update();
+      }
+
       final result = await Get.toNamed(
         '/video-trim',
         arguments: videoFile.value,
       );
+      
       if (result != null && result is File) {
         updateVideo(result);
+      } else {
+        // Re-initialize if they cancelled trimming
+        initializeController(videoFile.value!);
       }
     }
   }
